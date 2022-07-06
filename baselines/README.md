@@ -102,7 +102,14 @@ python baselines/attack_scripts/GAO.py --model={$MODEL} --batch_size={$batch_siz
 ```shell
 python baselines/attack_scripts/SIA.py --dataset mn40 --surrogate_model={$MODEL} --target_model={$MODEL}
 ```
-
+### L3A
+```shell
+python baselines/attack_scripts/L3A_attack.py
+```
+ ### ISO
+```shell
+python baselines/attack_scripts/ISO.py --dataset mn40 --model={$MODEL}
+```
 ### PCBA
 #### procedure
 1. Train a surrogate classifier:
