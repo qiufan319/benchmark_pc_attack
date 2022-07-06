@@ -27,6 +27,7 @@ conda install pytorch torchvision torchaudio cudatoolkit=11.3 -c pytorchCancel c
 The code in this project is mainly divided into two folders, each of which has a detailed README file explaining its usage. Here I will briefly outline the structure of this repo.\
 ```baselines/``` contains code for training/testing the victim models as well as some baseline attack and defense methods.\
 ```ONet/```implements two variants of IF-Defense, **ONet-Mesh** and **ONet-Opt**.\
+```ART/``` implements **ART-Point** defense method.\ 
 Please go to each folder to see how to use the code in detail.
 ## Update history
 06/18/2022 Update drop point resutl and unified output format.\
