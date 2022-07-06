@@ -28,7 +28,7 @@ The code in this project is mainly divided into two folders, each of which has a
 ```baselines/``` contains code for training/testing the victim models as well as some baseline attack and defense methods.\
 ```ONet/```implements two variants of IF-Defense, **ONet-Mesh** and **ONet-Opt**.\
 ```ART/``` implements **ART-Point** defense method.\ 
-```PointWoLF/``` implements a point cloud mixing up method.\
+```PointWoLF/``` implements a point cloud mixing up method.
 Please go to each folder to see how to use the code in detail.
 ## Update history
 06/18/2022 Update drop point resutl and unified output format.\
