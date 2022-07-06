@@ -6,12 +6,13 @@ import sys
 import os
 
 import numpy as np
-
-root_path=os.path.abspath(os.path.join(os.getcwd(), "../"))
-sys.path.append(os.path.join(root_path, 'model'))
 root_path=os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.append(root_path)
-from attack.L3A.adv_utils import *
+sys.path.append(os.path.join(root_path, 'model'))
+sys.path.append(os.path.join(root_path, 'attack','L3A'))
+
+
+from adv_utils import *
 from tensorboardX import SummaryWriter
 from shutil import copyfile
 # from model import DGCNN, PointNetCls, PointNet2ClsSsg, PointConvDensityClsSsg
@@ -122,7 +123,7 @@ if __name__ == '__main__':
         'save_as_dataset' : True,
         'is_pwa' : False,
         'is_lcons' : False,
-        'data_root':'../data/attack_data.npz',
+        'data_root':'baselines/data/attack_data.npz',
         'batch_size':12
     }
 
@@ -140,7 +141,7 @@ if __name__ == '__main__':
 
     model = MODEL.get_model(num_class, normal_channel=False).cuda()
 
-    checkpoint = torch.load('../pretrain/pointnet_cls.pth')
+    checkpoint = torch.load('baselines/pretrain/pointnet_cls.pth')
     model.load_state_dict(checkpoint['model_state_dict'])
     floss = MODEL.get_loss().cuda()
 

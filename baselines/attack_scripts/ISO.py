@@ -3,6 +3,7 @@ import sys
 import os
 root_path=os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.append(root_path)
+sys.path.append(os.path.join(root_path,'attack','ISO'))
 import open3d as o3d #do not import open3d befor torch
 import argparse
 import os
@@ -15,19 +16,19 @@ import torch.nn as nn
 import torch.optim as optim
 import torch.nn.functional as F
 from torch.utils.data import Dataset, DataLoader
-from attack.ISO.utils import progress_bar, adjust_lr_steep, log_row
+from utils_ISO import progress_bar, adjust_lr_steep, log_row
 from torch.autograd import Variable
-from baselines.model import DGCNN, PointNetCls, PointNet2ClsSsg, PointConvDensityClsSsg
+from model import DGCNN, PointNetCls, PointNet2ClsSsg, PointConvDensityClsSsg
 from dataset import ModelNet40Attack
-from attack.ISO.transforms_3d import *
+from transforms_3d import *
 
 # from models.pointnet import PointNetCls, feature_transform_regularizer
 # from models.pointnet2 import PointNet2ClsMsg
 # from models.dgcnn import DGCNN
 # from models.pointcnn import PointCNNCls
 from config import BEST_WEIGHTS
-import attack.ISO.isometry_init
-import attack.ISO.thompson_sample as ts
+import isometry_init
+import thompson_sample as ts
 
 
 
@@ -35,7 +36,7 @@ def save_visual_points(points, rt_matrix, args, i, penalty):
     # points size B*N*3 np array
     if not os.path.isdir('visual_data'):
         os.mkdir('visual_data')
-    fname = 'visual_data/%s_%s_%s'%(args.data, args.model, args.name)
+    fname = 'visual_data/%s_%s_%s'%(args.dataset, args.model, args.name)
     if not os.path.isdir(fname):
         os.mkdir(fname)
     points = points.transpose(2, 1)
@@ -196,7 +197,7 @@ def recover(model, test_loader):
 def gen_attack_log(args):
     if not os.path.isdir('logs_attack'):
         os.mkdir('logs_attack')
-    logname = ('logs_attack/ctri_%s_%s_%s.csv'%(args.data, args.model, args.name))
+    logname = ('logs_attack/ctri_%s_%s_%s.csv'%(args.dataset, args.model, args.name))
     
     if os.path.exists(logname):
         with open(logname, 'a') as logfile:
@@ -209,7 +210,7 @@ def gen_attack_log(args):
                 'number of points in one batch', 'number of points in one object', 'model load path', 'steps of gradient-like attack', 
                 'step size (lr) fo gradient-like attack', 'number of test objects', 'penalty coefficient',
                 'target or not', 'kappa for CW', 'number of repeat initial attacks', 'number of divisions for theta', 'range of angle'])
-        logwriter.writerow([args.model, args.data, args.seed, args.attack_batch_size, 
+        logwriter.writerow([args.model, args.dataset, args.seed, args.attack_batch_size,
                 args.num_points, args.model_path, args.num_steps, args.step_size,
                 args.num_tests, args.LAMBDA, args.target, args.kappa, args.num_init, 
                 args.d, args.a, args.b])
@@ -284,7 +285,7 @@ if __name__ == '__main__':
     
     parser = argparse.ArgumentParser()
     parser.add_argument('--model', type=str, default='pointnet', help='choose victim model type')
-    parser.add_argument('--data', type=str, default='mn40', help='choose vanila data set')
+    parser.add_argument('--dataset', type=str, default='mn40', help='choose vanila data set')
     parser.add_argument('--seed', type=int, default=0, help='manual random seed')
     parser.add_argument('--attack_batch_size', type=int, default=1, help='attack batch size')
     parser.add_argument('--num_points', type=int, default=1024, help='number of points sampled for one object')
@@ -308,13 +309,13 @@ if __name__ == '__main__':
     parser.add_argument('--k', type=int, default=20, metavar='N',
                         help='Num of nearest neighbors to use')
     parser.add_argument('--data_root', type=str,
-                        default='../data/attack_data.npz')
+                        default='baselines/data/attack_data.npz')
     args = parser.parse_args()
     args.feature_transform = bool(args.feature_transform)
     args.seed = args.seed if args.seed > 0 else random.randint(1, 10000)
     print("Random Seed: ", args.seed)
     torch.manual_seed(args.seed)
-    BEST_WEIGHTS = BEST_WEIGHTS[args.data][args.num_points]
+    BEST_WEIGHTS = BEST_WEIGHTS[args.dataset][args.num_points]
     ############################################################
     ## Load victim model
     ############################################################

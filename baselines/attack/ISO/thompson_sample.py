@@ -5,7 +5,7 @@ root_path=os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.append(root_path)
 import torch
 import torch.nn.functional as F
-import attack.ISO.isometry_init as isometry_init
+import isometry_init as isometry_init
 
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
