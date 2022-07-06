@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module type="PYTHON_MODULE" version="4">
+  <component name="NewModuleRootManager">
+<<<<<<< HEAD
+    <content url="file://$MODULE_DIR$/../ModelNet-C-main" />
+    <content url="file://$MODULE_DIR$" />
+=======
+    <content url="file://$MODULE_DIR$">
+      <sourceFolder url="file://$MODULE_DIR$/baselines" isTestSource="false" />
+    </content>
+    <content url="file://$MODULE_DIR$/../tensorflow-LG-GAN-master">
+      <sourceFolder url="file://$MODULE_DIR$/../tensorflow-LG-GAN-master" isTestSource="false" />
+    </content>
+>>>>>>> 96fc4637445e2606a447efad9d043d7ca2c50f42
+    <orderEntry type="jdk" jdkName="Python 3.7 (benchmark)" jdkType="Python SDK" />
+    <orderEntry type="sourceFolder" forTests="false" />
+  </component>
+  <component name="PyDocumentationSettings">
+    <option name="format" value="GOOGLE" />
+    <option name="myDocStringFormat" value="Google" />
+  </component>
+</module>
