@@ -34,6 +34,7 @@ Please go to each folder to see how to use the code in detail.
 06/18/2022 Update drop point resutl and unified output format.\
 06/22/2022 Update two baselines(PCT and curvenet).\
 06/22/2022 Update LG-GAN.\
+07/02/2022 Update ISO and L3A.\
 07/10/2022 Update EOP and CTA.
 ## Result
 Classification accuracy of ModelNet40 under black-box attacks and defense.\
