@@ -92,11 +92,11 @@ if __name__ == "__main__":
     # Training settings
     parser = argparse.ArgumentParser(description='Point Cloud Recognition')
     parser.add_argument('--data_root', type=str,
-                        default=r'/home/jqf/桌面/benchmark_pc_attack1-master/baselines/attack_scripts/results/mn40_1024/L3A/sor/sor_de.npz')
+                        default=r'/home/jqf/桌面/benchmark_pc_attack1-master（复件）/baselines/attack_scripts/results/mn40_1024/EOP/EOP_pointnet.npz')
     parser.add_argument('--mode', type=str, default='normal',
                         choices=['normal', 'target'],
                         help='Testing mode')
-    parser.add_argument('--model', type=str, default='pointnet2',
+    parser.add_argument('--model', type=str, default='pointnet',
                         choices=['pointnet', 'pointnet2',
                                  'dgcnn', 'pointconv', 'curvenet', 'pct', 'simple_view', 'pointcnn'],
                         help='Model to use, [pointnet, pointnet++, dgcnn, pointconv,curvenet,pct,simple_view]')
@@ -227,3 +227,4 @@ if __name__ == "__main__":
         test_normal()
     else:
         test_target()
+
