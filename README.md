@@ -35,7 +35,8 @@ Please go to each folder to see how to use the code in detail.
 06/22/2022 Update two baselines(PCT and curvenet).\
 06/22/2022 Update LG-GAN.\
 07/02/2022 Update ISO and L3A.\
-07/10/2022 Update EOP and CTA.
+07/10/2022 Update EOP and CTA.\
+07/13/2022 Update JGBA.
 ## Result
 Classification accuracy of ModelNet40 under black-box attacks and defense.\
 ***baslines***: PointNet
@@ -111,6 +112,11 @@ Classification accuracy of ModelNet40 under black-box attacks and defense.\
   border-left:none;mso-border-left-alt:solid windowtext .5pt;mso-border-alt:
   solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt">
   <p class="MsoNormal" align="center" style="text-align:center"><span lang="EN-US">CTA</span></p>
+  </td>
+  <td width="79" valign="top" style="width:59.3pt;border:solid windowtext 1.0pt;
+  border-left:none;mso-border-left-alt:solid windowtext .5pt;mso-border-alt:
+  solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt">
+  <p class="MsoNormal" align="center" style="text-align:center"><span lang="EN-US">JGBA</span></p>
   </td>
  </tr>
  <tr style="mso-yfti-irow:1">
@@ -199,6 +205,12 @@ Classification accuracy of ModelNet40 under black-box attacks and defense.\
   mso-border-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt">
   <p class="MsoNormal" align="center" style="text-align:center"><span lang="EN-US">1.15%</span></p>
   </td>
+  <td width="79" valign="top" style="width:59.3pt;border-top:none;border-left:none;
+  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt">
+  <p class="MsoNormal" align="center" style="text-align:center"><span lang="EN-US">0%</span></p>
+  </td>
  </tr>
  <tr style="mso-yfti-irow:2">
   <td width="79" valign="top" style="width:59.25pt;border-top:none;border-left:
@@ -278,6 +290,12 @@ Classification accuracy of ModelNet40 under black-box attacks and defense.\
   mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
   mso-border-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt">
   <p class="MsoNormal" align="center" style="text-align:center"><span lang="EN-US">53.4%</span></p>
+  </td>
+  <td width="79" valign="top" style="width:59.3pt;border-top:none;border-left:none;
+  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt">
+  <p class="MsoNormal" align="center" style="text-align:center"><span lang="EN-US">0%</span></p>
   </td>
  </tr>
  <tr style="mso-yfti-irow:3">
@@ -359,6 +377,12 @@ Classification accuracy of ModelNet40 under black-box attacks and defense.\
   mso-border-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt">
   <p class="MsoNormal" align="center" style="text-align:center"><span lang="EN-US">99%</span></p>
   </td>
+  <td width="79" valign="top" style="width:59.3pt;border-top:none;border-left:none;
+  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt">
+  <p class="MsoNormal" align="center" style="text-align:center"><span lang="EN-US">1%</span></p>
+  </td>
  </tr>
  <tr style="mso-yfti-irow:4">
   <td width="79" valign="top" style="width:59.25pt;border-top:none;border-left:
@@ -408,6 +432,12 @@ Classification accuracy of ModelNet40 under black-box attacks and defense.\
   mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
   mso-border-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt">
   <p class="MsoNormal" align="center" style="text-align:center"><span lang="EN-US">0%</span></p>
+  </td>
+  <td width="79" valign="top" style="width:59.3pt;border-top:none;border-left:none;
+  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt">
+  <p class="MsoNormal" align="center" style="text-align:center"><span lang="EN-US"><o:p>&nbsp;</o:p></span></p>
   </td>
   <td width="79" valign="top" style="width:59.3pt;border-top:none;border-left:none;
   border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
@@ -519,6 +549,12 @@ Classification accuracy of ModelNet40 under black-box attacks and defense.\
   mso-border-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt">
   <p class="MsoNormal" align="center" style="text-align:center"><span lang="EN-US">97.62%</span></p>
   </td>
+  <td width="79" valign="top" style="width:59.3pt;border-top:none;border-left:none;
+  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt">
+  <p class="MsoNormal" align="center" style="text-align:center"><span lang="EN-US">1.8%</span></p>
+  </td>
  </tr>
  <tr style="mso-yfti-irow:6">
   <td width="84" rowspan="5" valign="top" style="width:62.65pt;border:solid windowtext 1.0pt;
@@ -606,6 +642,12 @@ Classification accuracy of ModelNet40 under black-box attacks and defense.\
   mso-border-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt">
   <p class="MsoNormal" align="center" style="text-align:center"><span lang="EN-US">6.78%</span></p>
   </td>
+  <td width="79" valign="top" style="width:59.3pt;border-top:none;border-left:none;
+  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt">
+  <p class="MsoNormal" align="center" style="text-align:center"><span lang="EN-US">8%</span></p>
+  </td>
  </tr>
  <tr style="mso-yfti-irow:7">
   <td width="79" valign="top" style="width:59.25pt;border-top:none;border-left:
@@ -685,6 +727,12 @@ Classification accuracy of ModelNet40 under black-box attacks and defense.\
   mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
   mso-border-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt">
   <p class="MsoNormal" align="center" style="text-align:center"><span lang="EN-US">7.7%</span></p>
+  </td>
+  <td width="79" valign="top" style="width:59.3pt;border-top:none;border-left:none;
+  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt">
+  <p class="MsoNormal" align="center" style="text-align:center"><span lang="EN-US">8.2%</span></p>
   </td>
  </tr>
  <tr style="mso-yfti-irow:8">
@@ -766,6 +814,12 @@ Classification accuracy of ModelNet40 under black-box attacks and defense.\
   mso-border-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt">
   <p class="MsoNormal" align="center" style="text-align:center"><span lang="EN-US">8.2%</span></p>
   </td>
+  <td width="79" valign="top" style="width:59.3pt;border-top:none;border-left:none;
+  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt">
+  <p class="MsoNormal" align="center" style="text-align:center"><span lang="EN-US">8.11%</span></p>
+  </td>
  </tr>
  <tr style="mso-yfti-irow:9">
   <td width="79" valign="top" style="width:59.25pt;border-top:none;border-left:
@@ -815,6 +869,12 @@ Classification accuracy of ModelNet40 under black-box attacks and defense.\
   mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
   mso-border-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt">
   <p class="MsoNormal" align="center" style="text-align:center"><span lang="EN-US">0%</span></p>
+  </td>
+  <td width="79" valign="top" style="width:59.3pt;border-top:none;border-left:none;
+  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt">
+  <p class="MsoNormal" align="center" style="text-align:center"><span lang="EN-US"><o:p>&nbsp;</o:p></span></p>
   </td>
   <td width="79" valign="top" style="width:59.3pt;border-top:none;border-left:none;
   border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
@@ -926,6 +986,12 @@ Classification accuracy of ModelNet40 under black-box attacks and defense.\
   mso-border-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt">
   <p class="MsoNormal" align="center" style="text-align:center"><span lang="EN-US">8.16%</span></p>
   </td>
+  <td width="79" valign="top" style="width:59.3pt;border-top:none;border-left:none;
+  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt">
+  <p class="MsoNormal" align="center" style="text-align:center"><span lang="EN-US">8.16%</span></p>
+  </td>
  </tr>
  <tr style="mso-yfti-irow:11">
   <td width="84" rowspan="5" valign="top" style="width:62.65pt;border:solid windowtext 1.0pt;
@@ -1013,6 +1079,12 @@ Classification accuracy of ModelNet40 under black-box attacks and defense.\
   mso-border-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt">
   <p class="MsoNormal" align="center" style="text-align:center"><span lang="EN-US">65.22%</span></p>
   </td>
+  <td width="79" valign="top" style="width:59.3pt;border-top:none;border-left:none;
+  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt">
+  <p class="MsoNormal" align="center" style="text-align:center"><span lang="EN-US">16%</span></p>
+  </td>
  </tr>
  <tr style="mso-yfti-irow:12">
   <td width="79" valign="top" style="width:59.25pt;border-top:none;border-left:
@@ -1092,6 +1164,12 @@ Classification accuracy of ModelNet40 under black-box attacks and defense.\
   mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
   mso-border-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt">
   <p class="MsoNormal" align="center" style="text-align:center"><span lang="EN-US">65%</span></p>
+  </td>
+  <td width="79" valign="top" style="width:59.3pt;border-top:none;border-left:none;
+  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt">
+  <p class="MsoNormal" align="center" style="text-align:center"><span lang="EN-US">12.1%</span></p>
   </td>
  </tr>
  <tr style="mso-yfti-irow:13">
@@ -1173,6 +1251,12 @@ Classification accuracy of ModelNet40 under black-box attacks and defense.\
   mso-border-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt">
   <p class="MsoNormal" align="center" style="text-align:center"><span lang="EN-US">96.42%</span></p>
   </td>
+  <td width="79" valign="top" style="width:59.3pt;border-top:none;border-left:none;
+  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt">
+  <p class="MsoNormal" align="center" style="text-align:center"><span lang="EN-US">27%</span></p>
+  </td>
  </tr>
  <tr style="mso-yfti-irow:14">
   <td width="79" valign="top" style="width:59.25pt;border-top:none;border-left:
@@ -1222,6 +1306,12 @@ Classification accuracy of ModelNet40 under black-box attacks and defense.\
   mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
   mso-border-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt">
   <p class="MsoNormal" align="center" style="text-align:center"><span lang="EN-US">0%</span></p>
+  </td>
+  <td width="79" valign="top" style="width:59.3pt;border-top:none;border-left:none;
+  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt">
+  <p class="MsoNormal" align="center" style="text-align:center"><span lang="EN-US"><o:p>&nbsp;</o:p></span></p>
   </td>
   <td width="79" valign="top" style="width:59.3pt;border-top:none;border-left:none;
   border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
@@ -1333,6 +1423,12 @@ Classification accuracy of ModelNet40 under black-box attacks and defense.\
   mso-border-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt">
   <p class="MsoNormal" align="center" style="text-align:center"><span lang="EN-US">95.19%</span></p>
   </td>
+  <td width="79" valign="top" style="width:59.3pt;border-top:none;border-left:none;
+  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt">
+  <p class="MsoNormal" align="center" style="text-align:center"><span lang="EN-US">31.03%</span></p>
+  </td>
  </tr>
  <tr style="mso-yfti-irow:16">
   <td width="84" rowspan="5" valign="top" style="width:62.65pt;border:solid windowtext 1.0pt;
@@ -1420,6 +1516,12 @@ Classification accuracy of ModelNet40 under black-box attacks and defense.\
   mso-border-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt">
   <p class="MsoNormal" align="center" style="text-align:center"><span lang="EN-US">89.83%</span></p>
   </td>
+  <td width="79" valign="top" style="width:59.3pt;border-top:none;border-left:none;
+  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt">
+  <p class="MsoNormal" align="center" style="text-align:center"><span lang="EN-US">12%</span></p>
+  </td>
  </tr>
  <tr style="mso-yfti-irow:17">
   <td width="79" valign="top" style="width:59.25pt;border-top:none;border-left:
@@ -1499,6 +1601,12 @@ Classification accuracy of ModelNet40 under black-box attacks and defense.\
   mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
   mso-border-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt">
   <p class="MsoNormal" align="center" style="text-align:center"><span lang="EN-US">89%</span></p>
+  </td>
+  <td width="79" valign="top" style="width:59.3pt;border-top:none;border-left:none;
+  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt">
+  <p class="MsoNormal" align="center" style="text-align:center"><span lang="EN-US">27.27%</span></p>
   </td>
  </tr>
  <tr style="mso-yfti-irow:18">
@@ -1580,6 +1688,12 @@ Classification accuracy of ModelNet40 under black-box attacks and defense.\
   mso-border-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt">
   <p class="MsoNormal" align="center" style="text-align:center"><span lang="EN-US">94.78%</span></p>
   </td>
+  <td width="79" valign="top" style="width:59.3pt;border-top:none;border-left:none;
+  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt">
+  <p class="MsoNormal" align="center" style="text-align:center"><span lang="EN-US">30%</span></p>
+  </td>
  </tr>
  <tr style="mso-yfti-irow:19">
   <td width="79" valign="top" style="width:59.25pt;border-top:none;border-left:
@@ -1629,6 +1743,12 @@ Classification accuracy of ModelNet40 under black-box attacks and defense.\
   mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
   mso-border-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt">
   <p class="MsoNormal" align="center" style="text-align:center"><span lang="EN-US">0%</span></p>
+  </td>
+  <td width="79" valign="top" style="width:59.3pt;border-top:none;border-left:none;
+  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt">
+  <p class="MsoNormal" align="center" style="text-align:center"><span lang="EN-US"><o:p>&nbsp;</o:p></span></p>
   </td>
   <td width="79" valign="top" style="width:59.3pt;border-top:none;border-left:none;
   border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
@@ -1740,6 +1860,12 @@ Classification accuracy of ModelNet40 under black-box attacks and defense.\
   mso-border-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt">
   <p class="MsoNormal" align="center" style="text-align:center"><span lang="EN-US">93.9%</span></p>
   </td>
+  <td width="79" valign="top" style="width:59.3pt;border-top:none;border-left:none;
+  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt">
+  <p class="MsoNormal" align="center" style="text-align:center"><span lang="EN-US">30%</span></p>
+  </td>
  </tr>
  <tr style="mso-yfti-irow:21">
   <td rowspan="5" style="border:solid windowtext 1.0pt;border-top:none;
@@ -1825,6 +1951,12 @@ Classification accuracy of ModelNet40 under black-box attacks and defense.\
   mso-border-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt">
   <p class="MsoNormal" align="center" style="text-align:center"><span lang="EN-US">74%</span></p>
   </td>
+  <td width="79" valign="top" style="width:59.3pt;border-top:none;border-left:none;
+  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt">
+  <p class="MsoNormal" align="center" style="text-align:center"><span lang="EN-US">15.67%</span></p>
+  </td>
  </tr>
  <tr style="mso-yfti-irow:22">
   <td width="79" valign="top" style="width:59.25pt;border-top:none;border-left:
@@ -1837,7 +1969,7 @@ Classification accuracy of ModelNet40 under black-box attacks and defense.\
   none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
   mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
   mso-border-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt">
-  <p class="MsoNormal" align="center" style="text-align:center"><span lang="EN-US"><o:p>&nbsp;</o:p></span></p>
+  <p class="MsoNormal" align="center" style="text-align:center"><span lang="EN-US">82.58%</span></p>
   </td>
   <td width="94" valign="top" style="width:70.25pt;border-top:none;border-left:
   none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
@@ -1905,6 +2037,12 @@ Classification accuracy of ModelNet40 under black-box attacks and defense.\
   mso-border-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt">
   <p class="MsoNormal" align="center" style="text-align:center"><span lang="EN-US">73%</span></p>
   </td>
+  <td width="79" valign="top" style="width:59.3pt;border-top:none;border-left:none;
+  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt">
+  <p class="MsoNormal" align="center" style="text-align:center"><span lang="EN-US">73%</span></p>
+  </td>
  </tr>
  <tr style="mso-yfti-irow:23">
   <td width="79" valign="top" style="width:59.25pt;border-top:none;border-left:
@@ -1917,7 +2055,7 @@ Classification accuracy of ModelNet40 under black-box attacks and defense.\
   none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
   mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
   mso-border-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt">
-  <p class="MsoNormal" align="center" style="text-align:center"><span lang="EN-US"><o:p>&nbsp;</o:p></span></p>
+  <p class="MsoNormal" align="center" style="text-align:center"><span lang="EN-US">88.41%</span></p>
   </td>
   <td width="94" valign="top" style="width:70.25pt;border-top:none;border-left:
   none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
@@ -1985,6 +2123,12 @@ Classification accuracy of ModelNet40 under black-box attacks and defense.\
   mso-border-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt">
   <p class="MsoNormal" align="center" style="text-align:center"><span lang="EN-US">96%</span></p>
   </td>
+  <td width="79" valign="top" style="width:59.3pt;border-top:none;border-left:none;
+  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt">
+  <p class="MsoNormal" align="center" style="text-align:center"><span lang="EN-US">74%</span></p>
+  </td>
  </tr>
  <tr style="mso-yfti-irow:24">
   <td width="79" valign="top" style="width:59.25pt;border-top:none;border-left:
@@ -1997,7 +2141,7 @@ Classification accuracy of ModelNet40 under black-box attacks and defense.\
   none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
   mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
   mso-border-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt">
-  <p class="MsoNormal" align="center" style="text-align:center"><span lang="EN-US"><o:p>&nbsp;</o:p></span></p>
+  <p class="MsoNormal" align="center" style="text-align:center"><span lang="EN-US">87.64%</span></p>
   </td>
   <td width="94" valign="top" style="width:70.25pt;border-top:none;border-left:
   none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
@@ -2034,6 +2178,12 @@ Classification accuracy of ModelNet40 under black-box attacks and defense.\
   mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
   mso-border-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt">
   <p class="MsoNormal" align="center" style="text-align:center"><span lang="EN-US">0%</span></p>
+  </td>
+  <td width="79" valign="top" style="width:59.3pt;border-top:none;border-left:none;
+  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt">
+  <p class="MsoNormal" align="center" style="text-align:center"><span lang="EN-US"><o:p>&nbsp;</o:p></span></p>
   </td>
   <td width="79" valign="top" style="width:59.3pt;border-top:none;border-left:none;
   border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
@@ -2145,6 +2295,12 @@ Classification accuracy of ModelNet40 under black-box attacks and defense.\
   mso-border-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt">
   <p class="MsoNormal" align="center" style="text-align:center"><span lang="EN-US">95.55%</span></p>
   </td>
+  <td width="79" valign="top" style="width:59.3pt;border-top:none;border-left:none;
+  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt">
+  <p class="MsoNormal" align="center" style="text-align:center"><span lang="EN-US">35.11%</span></p>
+  </td>
  </tr>
  <tr style="mso-yfti-irow:26">
   <td rowspan="5" style="border:solid windowtext 1.0pt;border-top:none;
@@ -2230,6 +2386,12 @@ Classification accuracy of ModelNet40 under black-box attacks and defense.\
   mso-border-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt">
   <p class="MsoNormal" align="center" style="text-align:center"><span lang="EN-US">41.48%</span></p>
   </td>
+  <td width="79" valign="top" style="width:59.3pt;border-top:none;border-left:none;
+  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt">
+  <p class="MsoNormal" align="center" style="text-align:center"><span lang="EN-US">15.9%</span></p>
+  </td>
  </tr>
  <tr style="mso-yfti-irow:27">
   <td width="79" valign="top" style="width:59.25pt;border-top:none;border-left:
@@ -2242,7 +2404,7 @@ Classification accuracy of ModelNet40 under black-box attacks and defense.\
   none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
   mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
   mso-border-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt">
-  <p class="MsoNormal" align="center" style="text-align:center"><span lang="EN-US"><o:p>&nbsp;</o:p></span></p>
+  <p class="MsoNormal" align="center" style="text-align:center"><span lang="EN-US">85.33%</span></p>
   </td>
   <td width="94" valign="top" style="width:70.25pt;border-top:none;border-left:
   none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
@@ -2310,6 +2472,12 @@ Classification accuracy of ModelNet40 under black-box attacks and defense.\
   mso-border-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt">
   <p class="MsoNormal" align="center" style="text-align:center"><span lang="EN-US">64.21%</span></p>
   </td>
+  <td width="79" valign="top" style="width:59.3pt;border-top:none;border-left:none;
+  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt">
+  <p class="MsoNormal" align="center" style="text-align:center"><span lang="EN-US">22.6%</span></p>
+  </td>
  </tr>
  <tr style="mso-yfti-irow:28">
   <td width="79" valign="top" style="width:59.25pt;border-top:none;border-left:
@@ -2322,7 +2490,7 @@ Classification accuracy of ModelNet40 under black-box attacks and defense.\
   none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
   mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
   mso-border-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt">
-  <p class="MsoNormal" align="center" style="text-align:center"><span lang="EN-US"><o:p>&nbsp;</o:p></span></p>
+  <p class="MsoNormal" align="center" style="text-align:center"><span lang="EN-US">88.33%</span></p>
   </td>
   <td width="94" valign="top" style="width:70.25pt;border-top:none;border-left:
   none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
@@ -2389,6 +2557,12 @@ Classification accuracy of ModelNet40 under black-box attacks and defense.\
   mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
   mso-border-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt">
   <p class="MsoNormal" align="center" style="text-align:center"><span lang="EN-US">95.37%</span></p>
+  </td>
+  <td width="79" valign="top" style="width:59.3pt;border-top:none;border-left:none;
+  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt">
+  <p class="MsoNormal" align="center" style="text-align:center"><span lang="EN-US">41.25%</span></p>
   </td>
  </tr>
  <tr style="mso-yfti-irow:29">
@@ -2470,6 +2644,12 @@ Classification accuracy of ModelNet40 under black-box attacks and defense.\
   mso-border-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt">
   <p class="MsoNormal" align="center" style="text-align:center"><span lang="EN-US"><o:p>&nbsp;</o:p></span></p>
   </td>
+  <td width="79" valign="top" style="width:59.3pt;border-top:none;border-left:none;
+  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt">
+  <p class="MsoNormal" align="center" style="text-align:center"><span lang="EN-US"><o:p>&nbsp;</o:p></span></p>
+  </td>
  </tr>
  <tr style="mso-yfti-irow:30;mso-yfti-lastrow:yes">
   <td width="79" valign="top" style="width:59.25pt;border-top:none;border-left:
@@ -2482,7 +2662,7 @@ Classification accuracy of ModelNet40 under black-box attacks and defense.\
   none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
   mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
   mso-border-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt">
-  <p class="MsoNormal" align="center" style="text-align:center"><span lang="EN-US"><o:p>&nbsp;</o:p></span></p>
+  <p class="MsoNormal" align="center" style="text-align:center"><span lang="EN-US">88%</span></p>
   </td>
   <td width="94" valign="top" style="width:70.25pt;border-top:none;border-left:
   none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
@@ -2549,6 +2729,12 @@ Classification accuracy of ModelNet40 under black-box attacks and defense.\
   mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
   mso-border-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt">
   <p class="MsoNormal" align="center" style="text-align:center"><span lang="EN-US">94.78%</span></p>
+  </td>
+  <td width="79" valign="top" style="width:59.3pt;border-top:none;border-left:none;
+  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt">
+  <p class="MsoNormal" align="center" style="text-align:center"><span lang="EN-US">42%</span></p>
   </td>
  </tr>
 </tbody></table>
