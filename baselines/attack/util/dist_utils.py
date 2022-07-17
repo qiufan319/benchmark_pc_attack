@@ -2,7 +2,7 @@ import numpy as np
 
 import torch
 import torch.nn as nn
-from baselines.util.set_distance import chamfer, hausdorff
+from util.set_distance import chamfer, hausdorff
 
 class L2Dist(nn.Module):
 

@@ -1,7 +1,10 @@
 """Config file for automatic code running
 Assign some hyper-parameters, e.g. batch size for attack
 """
-
+import os
+import sys
+root_path=os.path.abspath(os.path.join(os.getcwd(), "../.."))
+sys.path.append(os.path.join(root_path))
 BEST_WEIGHTS = {
     # trained on standard mn40 dataset
     'mn40': {
@@ -12,7 +15,6 @@ BEST_WEIGHTS = {
             'dgcnn': 'baselines/pretrain/mn40/dgcnn.pth',
             'curvenet': 'baselines/pretrain/mn40/curvenet.pth',
             'pct': 'baselines/pretrain/mn40/pct.pth',
-            'pointnet_cls': 'baselines/pretrain/pointnet_cls.pth',
         },
     },
     # trained on mn40 + ONet remesh-resampled mn40

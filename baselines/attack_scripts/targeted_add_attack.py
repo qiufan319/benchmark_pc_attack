@@ -26,7 +26,8 @@ from attack import CWAdd
 from attack import CrossEntropyAdvLoss, LogitsAdvLoss
 from attack import ChamferDist, HausdorffDist
 
-
+import visdom
+vis = visdom.Visdom(port=8097)
 def attack():
     model.eval()
     all_adv_pc = []
@@ -41,7 +42,12 @@ def attack():
 
         # attack!
         _, best_pc, success_num = attacker.attack(pc, target_label)
-
+        # visualization
+        p_color = torch.ones(best_pc.shape[1])
+        plot_pc = best_pc[0, :, :]
+        # plot_pc = plot_pc.transpose(1, 0)
+        vis.scatter(X=plot_pc[:, torch.LongTensor([2, 0, 1])], Y=p_color, win=2,
+                    opts={'title': "Generated Pointcloud", 'markersize': 3, 'webgl': True})
         # results
         num += success_num
         all_adv_pc.append(best_pc)
@@ -59,7 +65,7 @@ if __name__ == "__main__":
     # Training settings
     parser = argparse.ArgumentParser(description='Point Cloud Recognition')
     parser.add_argument('--data_root', type=str,
-                        default='../data/attack_data.npz')
+                        default='bsaelines/data/attack_data.npz')
     parser.add_argument('--model', type=str, default='pointnet', metavar='N',
                         choices=['pointnet', 'pointnet2',
                                  'dgcnn', 'pointconv'],

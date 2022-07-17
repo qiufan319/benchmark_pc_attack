@@ -25,7 +25,7 @@ from attack import CWKNN
 from attack import CrossEntropyAdvLoss, LogitsAdvLoss
 from attack import ChamferkNNDist
 from attack import ProjectInnerClipLinf
-
+import visdom
 
 def attack():
     model.eval()
@@ -41,7 +41,11 @@ def attack():
 
         # attack!
         best_pc, success_num = attacker.attack(pc, target_label)
-
+        # p_color=torch.ones(best_pc.shape[1])
+        # plot_pc=best_pc[0,:,:]
+        # plot_pc=np.squeeze(plot_pc)
+        # vis.scatter(X=plot_pc[:, torch.LongTensor([2, 0, 1])], Y=p_color, win=2,
+        #             opts={'title': "Generated Pointcloud", 'markersize': 3, 'webgl': True})
         # results
         num += success_num
         all_adv_pc.append(best_pc)
@@ -148,10 +152,12 @@ if __name__ == "__main__":
                                       normalize=True)
     #test_sampler = DistributedSampler(test_set, shuffle=False)
     test_loader = DataLoader(test_set, batch_size=args.batch_size,
-                             shuffle=False, num_workers=4,
+                             shuffle=False, num_workers=0,
                              pin_memory=True, drop_last=False,
                              sampler=None)
-
+    #visualization
+    # vis=visdom.Visdom(port=8097)
+    # print('visdom loaded')
     # run attack
     attacked_data, real_label, target_label, success_num = attack()
 
@@ -164,8 +170,6 @@ if __name__ == "__main__":
         format(args.dataset, args.num_points)
     if not os.path.exists(save_path):
         os.makedirs(save_path)
-    if args.adv_func == 'logits':
-        args.adv_func = 'logits_kappa={}'.format(args.kappa)
     save_name = 'kNN-{}-{}-success_{:.4f}-rank_{}.npz'.\
         format(args.model, args.adv_func,
                success_rate, args.local_rank)

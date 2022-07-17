@@ -9,7 +9,7 @@ import torch
 import torch.nn as nn
 import torch.optim as optim
 import numpy as np
-
+import visdom
 
 class CWKNN:
     """Class for CW attack.
@@ -44,6 +44,9 @@ class CWKNN:
             data (torch.FloatTensor): victim data, [B, num_points, 3]
             target (torch.LongTensor): target output, [B]
         """
+        # visualization
+        vis = visdom.Visdom(port=8097)
+
         B, K = data.shape[:2]
         data = data.float().cuda().detach()
         data = data.transpose(1, 2).contiguous()
@@ -119,16 +122,12 @@ class CWKNN:
             clip_time = t4 - t3
             total_time += t4 - t1
 
-            # if iteration % 100 == 0:
-            #     print('total time: {:.2f}, for: {:.2f}, '
-            #           'back: {:.2f}, clip: {:.2f}'.
-            #           format(total_time, forward_time,
-            #                  backward_time, clip_time))
-            #     total_time = 0.
-            #     forward_time = 0.
-            #     backward_time = 0.
-            #     clip_time = 0.
-            #     torch.cuda.empty_cache()
+            if iteration%500==0:
+                p_color = torch.ones(adv_data.shape[2])
+                plot_pc = adv_data[0, :, :]
+                plot_pc = plot_pc.transpose(1,0)
+                vis.scatter(X=plot_pc[:, torch.LongTensor([2, 0, 1])], Y=p_color, win=2,
+                            opts={'title': "Generated Pointcloud", 'markersize': 3, 'webgl': True})
 
         # end of CW attack
         with torch.no_grad():

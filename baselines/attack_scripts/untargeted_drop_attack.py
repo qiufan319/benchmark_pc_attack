@@ -22,7 +22,8 @@ from model import DGCNN, PointNetCls, PointNet2ClsSsg, PointConvDensityClsSsg
 from util.utils import str2bool, set_seed
 from attack import SaliencyDrop
 
-
+import visdom
+vis = visdom.Visdom(port=8097)
 def attack():
     model.eval()
     all_adv_pc = []
@@ -36,7 +37,12 @@ def attack():
 
         # input GT label here because it's untargeted attack
         best_pc, success_num = attacker.attack(pc, label)
-
+        # visualization
+        p_color = torch.ones(best_pc.shape[1])
+        plot_pc = best_pc[0, :, :]
+        # plot_pc = plot_pc.transpose(1, 0)
+        vis.scatter(X=plot_pc[:, torch.LongTensor([2, 0, 1])], Y=p_color, win=2,
+                    opts={'title': "Generated Pointcloud", 'markersize': 3, 'webgl': True})
         # results
         num += success_num
         all_adv_pc.append(best_pc)

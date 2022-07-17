@@ -24,8 +24,8 @@ from util.utils import str2bool, set_seed
 from attack import FGM, IFGM, MIFGM, PGD
 from attack import CrossEntropyAdvLoss, LogitsAdvLoss
 from attack import ClipPointsL2
-
-
+import visdom
+vis = visdom.Visdom(port=8097)
 def attack():
     model.eval()
     all_adv_pc = []
@@ -40,7 +40,12 @@ def attack():
 
         # attack!
         best_pc, success_num = attacker.attack(pc, target_label)
-
+        # visualization
+        p_color = torch.ones(best_pc.shape[1])
+        plot_pc = best_pc[0, :, :]
+        # plot_pc = plot_pc.transpose(1, 0)
+        vis.scatter(X=plot_pc[:, torch.LongTensor([2, 0, 1])], Y=p_color, win=2,
+                    opts={'title': "Generated Pointcloud", 'markersize': 3, 'webgl': True})
         # results
         num += success_num
         all_adv_pc.append(best_pc)
@@ -58,7 +63,7 @@ if __name__ == "__main__":
     # Training settings
     parser = argparse.ArgumentParser(description='Point Cloud Recognition')
     parser.add_argument('--data_root', type=str,
-                        default='../data/attack_data.npz')
+                        default='baselines/data/attack_data.npz')
     parser.add_argument('--model', type=str, default='pointnet', metavar='N',
                         choices=['pointnet', 'pointnet2',
                                  'dgcnn', 'pointconv'],
@@ -67,7 +72,7 @@ if __name__ == "__main__":
                         help='whether to use STN on features in PointNet')
     parser.add_argument('--dataset', type=str, default='mn40', metavar='N',
                         choices=['mn40', 'remesh_mn40', 'opt_mn40', 'conv_opt_mn40'])
-    parser.add_argument('--batch_size', type=int, default=32, metavar='BS',
+    parser.add_argument('--batch_size', type=int, default=16, metavar='BS',
                         help='Size of batch')
     parser.add_argument('--num_points', type=int, default=1024,
                         help='num of points to use')
@@ -80,7 +85,7 @@ if __name__ == "__main__":
                         help='Adversarial loss function to use')
     parser.add_argument('--kappa', type=float, default=0.,
                         help='min margin in logits adv loss')
-    parser.add_argument('--attack_type', type=str, default='FGM', metavar='N',
+    parser.add_argument('--attack_type', type=str, default='pgd', metavar='N',
                         help='Attack method to use')
     parser.add_argument('--budget', type=float, default=0.08,
                         help='FGM attack budget')
@@ -168,7 +173,7 @@ if __name__ == "__main__":
                                 normalize=True)
     #test_sampler = DistributedSampler(test_set, shuffle=False)
     test_loader = DataLoader(test_set, batch_size=args.batch_size,
-                             shuffle=False, num_workers=4,
+                             shuffle=False, num_workers=0,
                              pin_memory=True, drop_last=False,
                              sampler=None)
 

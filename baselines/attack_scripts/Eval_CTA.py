@@ -28,7 +28,8 @@ from torch.utils.data import DataLoader
 # BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 # ROOT_DIR = BASE_DIR
 # sys.path.append(os.path.join(ROOT_DIR, 'models'))
-
+import visdom
+vis = visdom.Visdom(port=8097)
 def check_num_pc_changed(adv,ori):
     logits_mtx = np.logical_and.reduce(adv==ori,axis=1)
     return np.sum(logits_mtx==False)
@@ -199,6 +200,12 @@ for i,(pc, label, target) in enumerate(test_loader):
             all_adv_pc.append(adv_pc[np.newaxis, :, :])
             all_real_label.append(ori_class)
             all_target_lable.append(target)
+            # visualization
+            p_color = torch.ones(adv_pc.shape[0])
+            plot_pc = adv_pc
+            # plot_pc = plot_pc.transpose(1, 0)
+            vis.scatter(X=plot_pc[:, torch.LongTensor([2, 0, 1])], Y=p_color, win=2,
+                        opts={'title': "Generated Pointcloud", 'markersize': 3, 'webgl': True})
             print('Hausdorff distance: ', "%e"%Hausdorff_dis)
             print('Chamfer distance: ', "%e"%cham_dis)
             print('Number of points changed: ', num_perturbed_pc)

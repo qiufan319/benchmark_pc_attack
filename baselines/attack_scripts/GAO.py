@@ -295,11 +295,6 @@ def main(cfg):
                     attack_success = attack_success_iter
 
             saved_pc = adv_pc.cpu().clone().numpy()
-            # if i % (cfg.iter_max_steps*cfg.binary_max_steps // 500) == 0:
-            #     print('Step {}, iteration {}, success {}/{}\n'
-            #           'adv_loss: {:.4f}, dist_loss: {:.4f}'.
-            #           format(binary_step, i, success_num, B,
-            #                  adv_loss.item(), dist_loss.item()))
             for k in range(b):
                 if attack_success_indicator[k].item():
                     num_attack_success += 1
@@ -309,52 +304,19 @@ def main(cfg):
                     all_adv_pc.append(a_pc)
                     all_real_lbl.append(real_label)
                     all_target_lbl.append(attack_label)
-
-            # for k in range(b):
-            #     if attack_success_indicator[k].item():
-            #         num_attack_success += 1
-    #                 name = 'adv_' + str(cnt_ins+k//num_attack_classes) + '_gt' + str(gt_target[k].item()) + '_attack' + str(torch.max(test_adv_output[0],1)[1].data[k].item()) + '_expect' + str(targeted_label[k].item())
-    #
-    #                 if cfg.is_save_normal:
-    #                     sio.savemat(os.path.join(saved_dir, 'Mat', name+'.mat'),
-    #                     {"adversary_point_clouds": saved_pc[k], 'gt_label': gt_target[k].item(), 'attack_label': torch.max(test_adv_output,1)[1].data[k].item(), 'est_normal':saved_normal[k]})
-    #                 else:
-    #                     sio.savemat(os.path.join(saved_dir, 'Mat', name+'.mat'),
-    #                     {"adversary_point_clouds": saved_pc[k], 'gt_label': gt_target[k].item(), 'attack_label': torch.max(test_adv_output[0],1)[1].data[k].item()})
-    #
-    #                 fout = open(os.path.join(saved_dir, 'PC', name+'.obj'), 'w')
-    #                 for m in range(saved_pc.shape[2]):
-    #                     fout.write('v %f %f %f 0 0 0\n' % (saved_pc[k, 0, m], saved_pc[k, 1, m], saved_pc[k, 2, m]))
-    #                 fout.close()
-    #
-    #         cnt_ins = cnt_ins + bs
-    #         cnt_all = cnt_all + b
-    #     # elif cfg.attack == 'GeoA3_mesh':
-    #     #     for k in range(b):
-    #     #         if attack_success_indicator[k].item() and best_score[k] != -1:
-    #     #             num_attack_success += 1
-    #     #             name = 'adv_' + str(cnt_ins+k//num_attack_classes) + '_gt' + str(gt_target[k].item()) + '_attack' + str(best_score[k]) + '_expect' + str(targeted_label[k].item())
-    #     #             final_verts, final_faces = adv_mesh[k].get_mesh_verts_faces(0)
-    #     #             #save .mat
-    #     #             sio.savemat(os.path.join(saved_dir, 'Mat', name+'.mat'), {"vert": final_verts, "faces":final_faces})
-    #     #             #save .obj mesh
-    #     #             file_name = os.path.join(saved_dir, 'Mesh', name+'.obj')
-    #     #             save_obj(file_name, final_verts, final_faces)
-    #     #
-    #     #     cnt_ins = cnt_ins + bs
-    #     #     cnt_all = cnt_all + b
-    all_adv_pc = np.array(all_adv_pc)
-    all_real_lbl = np.array(all_real_lbl)  # [num_data]
-    all_target_lbl = np.array(all_target_lbl)
-    save_path = 'baselines/attack_scripts/attack/results/{}_{}/GEOA3'. \
-        format("mn40", "1024")
-    isExists = os.path.exists(os.path.join(save_path, 'npz'))
-    if not isExists:
-        os.makedirs(os.path.join(save_path, 'npz'))
-    np.savez(os.path.join(save_path, 'npz', 'GEO.npz'),
-             test_pc=all_adv_pc.astype(np.float32),
-             test_label=all_real_lbl.astype(np.float32),
-             target_label=all_target_lbl.astype(np.uint8))
+        if i==100:
+            all_adv_pc_2 = np.array(all_adv_pc)
+            all_real_lbl_2 = np.array(all_real_lbl)  # [num_data]
+            all_target_lbl_2 = np.array(all_target_lbl)
+            save_path = 'baselines/attack_scripts/attack/results/{}_{}/GEOA3'. \
+                format("mn40", "1024")
+            isExists = os.path.exists(os.path.join(save_path, 'npz'))
+            if not isExists:
+                os.makedirs(os.path.join(save_path, 'npz'))
+            np.savez(os.path.join(save_path, 'npz', 'GEO.npz'),
+                     test_pc=all_adv_pc_2.astype(np.float32),
+                     test_label=all_real_lbl_2.astype(np.float32),
+                     target_label=all_target_lbl_2.astype(np.uint8))
     if cfg.attack == 'GeoA3':
         print('attack success: {0:.2f}\n'.format(num_attack_success/float(cnt_all)*100))
         with open(os.path.join(saved_dir, 'attack_result.txt'), 'at') as f:
@@ -434,7 +396,7 @@ if __name__ == '__main__':
     parser.add_argument('--is_record_converged_steps', action='store_true', default=False, help='')
     parser.add_argument('--is_record_loss', action='store_true', default=False, help='')
     #------------OS-----------------------
-    parser.add_argument('-j', '--num_workers', default=8, type=int, metavar='N', help='number of data loading workers (default: 8)')
+    parser.add_argument('-j', '--num_workers', default=0, type=int, metavar='N', help='number of data loading workers (default: 8)')
     parser.add_argument('--is_save_normal', action='store_true', default=False, help='')
     parser.add_argument('--is_debug', action='store_true', default=False, help='')
     parser.add_argument('--is_low_memory', action='store_true', default=False, help='')

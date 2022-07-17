@@ -13,7 +13,7 @@ import numpy as np
 
 from sklearn.cluster import DBSCAN
 
-from baselines.util.pointnet_utils import normalize_points_np
+from util.pointnet_utils import normalize_points_np
 
 
 def get_critical_points(model, pc, label, num):

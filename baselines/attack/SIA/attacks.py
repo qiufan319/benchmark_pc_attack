@@ -17,7 +17,7 @@ from torch.autograd import Variable
 from torch.distributions import Categorical
 
 from attack.SIA import *
-
+import visdom
 BASE_DIR = os.path.abspath(os.path.join(os.getcwd(), ".."))#os.path.dirname(os.path.abspath(__file__))
 ROOT_DIR = BASE_DIR
 sys.path.append(os.path.join(ROOT_DIR, 'model'))
@@ -101,7 +101,7 @@ class PointCloudAttack(object):
 
 
     def CWLoss(self, logits, target, kappa=0, tar=False, num_classes=40):
-        """Carlini & Wagner attack loss. 
+        """Carlini & Wagner attack loss.
 
         Args:
             logits (torch.cuda.FloatTensor): the predicted logits, [1, num_classes].
@@ -125,7 +125,7 @@ class PointCloudAttack(object):
             return torch.sum(torch.max(real-other, kappa))
 
 
-    def run(self, points, target):
+    def run(self, points, target,vis):
         """Main attack method.
 
         Args:
@@ -133,7 +133,7 @@ class PointCloudAttack(object):
             target (torch.cuda.LongTensor): the label for points, [1].
         """
         if self.attack_method == 'ifgm_ours':
-            return self.shape_invariant_ifgm(points, target)
+            return self.shape_invariant_ifgm(points, target,vis)
 
         elif self.attack_method == 'simba':
             return self.simba_attack(points, target)
@@ -173,7 +173,9 @@ class PointCloudAttack(object):
         """
         pcd = o3d.geometry.PointCloud()
         pcd.points = o3d.utility.Vector3dVector(points.squeeze(0).detach().cpu().numpy())
-        pcd.estimate_normals(search_param=o3d.geometry.KDTreeSearchParamKNN(knn=20))
+        # pcd.estimate_normals(search_param=o3d.geometry.KDTreeSearchParamKNN(knn=20))
+        o3d.geometry.estimate_normals(pcd, search_param=o3d.geometry.KDTreeSearchParamKNN(knn=20))
+
         normal_vec = torch.FloatTensor(np.array(pcd.normals)).cuda().unsqueeze(0)
         return normal_vec
 
@@ -243,13 +245,14 @@ class PointCloudAttack(object):
         return inputs
 
 
-    def shape_invariant_ifgm(self, points, target):
+    def shape_invariant_ifgm(self, points, target,vis):
         """Black-box I-FGSM based on shape-invariant sensitivity maps.
 
         Args:
             points (torch.cuda.FloatTensor): the point cloud with N points, [1, N, 6].
             target (torch.cuda.LongTensor): the label for points, [1].
         """
+
         normal_vec = points[:,:,-3:].data # N, [1, N, 3]
         normal_vec = normal_vec / torch.sqrt(torch.sum(normal_vec ** 2, dim=-1, keepdim=True)) # N, [1, N, 3]
         points = points[:,:,:3].data # P, [1, N, 3]
@@ -286,6 +289,7 @@ class PointCloudAttack(object):
             # points = torch.min(torch.max(points, ori_points - self.eps), ori_points + self.eps) # P, [1, N, 3]
             normal_vec = self.get_normal_vector(points) # N, [1, N, 3]
 
+
         with torch.no_grad():
             adv_points = points.data
             if not self.defense_method is None:
@@ -293,6 +297,8 @@ class PointCloudAttack(object):
             else:
                 adv_logits = self.classifier(points.transpose(1, 2).detach())[0]
             adv_target = adv_logits.data.max(1)[1]
+
+
         # print(target)
         # print(adv_target)
         if self.top5_attack:
@@ -303,6 +309,11 @@ class PointCloudAttack(object):
                 adv_target = -1
 
         del normal_vec, grad, new_points, spin_axis_matrix, translation_matrix
+        p_color = torch.ones(adv_points.shape[1])
+        plot_pc = adv_points[0, :, :]
+        # plot_pc = plot_pc.transpose(1, 0)
+        vis.scatter(X=plot_pc[:, torch.LongTensor([2, 0, 1])], Y=p_color, win=2,
+                    opts={'title': "Generated Pointcloud", 'markersize': 3, 'webgl': True})
         return adv_points, adv_target, (adv_logits.data.max(1)[1] != target).sum().item()
 
 
@@ -418,7 +429,7 @@ class PointCloudAttack(object):
         grad = points.grad.data # g, [1, 3, N]
         grad = abs(grad).reshape(-1)
 
-        # # rank 
+        # # rank
         # basis_list = []
         # for j in range(points.shape[2]):
         #     for i in range(3):

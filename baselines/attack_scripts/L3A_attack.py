@@ -19,7 +19,8 @@ from shutil import copyfile
 os.environ["CUDA_VISIBLE_DEVICES"] = '0'
 torch.backends.cudnn.enabled = False
 from dataset import ModelNet40Attack
-
+import visdom
+vis = visdom.Visdom(port=8097)
 def test_attack(model, loader, criterion, para):
     adv_t = para['adv_target_idx']
     save_pn_file = para['save_pn_file']
@@ -60,7 +61,12 @@ def test_attack(model, loader, criterion, para):
             mean_correct.append(correct.item() / float(points.size()[0]))
 
         adv_points, adv_target, pred_class, _ = adv_propagation(model.eval(), criterion, points, target, para)
-
+        # visualization
+        p_color = torch.ones(adv_points.shape[1])
+        plot_pc = adv_points[0, :, :]
+        # plot_pc = plot_pc.transpose(1, 0)
+        vis.scatter(X=plot_pc[:, torch.LongTensor([2, 0, 1])], Y=p_color, win=2,
+                    opts={'title': "Generated Pointcloud", 'markersize': 3, 'webgl': True})
         #save result
         all_adv_pc.append(adv_points.detach().cpu().numpy())
         all_real_lbl.append(target.detach().cpu().numpy())
@@ -141,7 +147,7 @@ if __name__ == '__main__':
 
     model = MODEL.get_model(num_class, normal_channel=False).cuda()
 
-    checkpoint = torch.load('baselines/pretrain/pointnet_cls.pth')
+    checkpoint = torch.load('../pretrain/pointnet_cls.pth')
     model.load_state_dict(checkpoint['model_state_dict'])
     floss = MODEL.get_loss().cuda()
 

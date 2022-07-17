@@ -24,7 +24,7 @@ sys.path.append(os.path.join(ROOT_DIR, 'Lib'))
 
 from attack.GAO.Lib.utility import estimate_perpendicular, _compare, farthest_points_sample, pad_larger_tensor_with_index_batch
 from attack.GAO.Lib.loss_utils import norm_l2_loss, chamfer_loss, pseudo_chamfer_loss, hausdorff_loss, curvature_loss, uniform_loss, _get_kappa_ori, _get_kappa_adv
-
+import visdom
 def resample_reconstruct_from_pc(cfg, output_file_name, pc, normal=None, reconstruct_type='PRS'):
     assert pc.size() == 2
     assert pc.size(2) == 3
@@ -230,6 +230,7 @@ def attack(net, input_data, cfg, i, loader_len, saved_dir=None):
     best_attack_step = [-1] * b
     best_attack_BS_idx = [-1] * b
     all_loss_list = [[-1] * b] * cfg.iter_max_steps
+    vis = visdom.Visdom(port=8097)
     for search_step in range(cfg.binary_max_steps):
         iter_best_loss = [1e10] * b
         iter_best_score = [-1] * b
@@ -372,6 +373,12 @@ def attack(net, input_data, cfg, i, loader_len, saved_dir=None):
                       'adv_loss: {:.4f}, dist_loss: {:.4f}'.
                       format(search_step+1, step+1, int(attack_num),b,
                              loss.item(), distance_loss))
+                #visualization
+                p_color = torch.ones(input_all.shape[2])
+                plot_pc = input_all[0, :, :]
+                plot_pc = plot_pc.transpose(1, 0)
+                vis.scatter(X=plot_pc[:, torch.LongTensor([2, 0, 1])], Y=p_color, win=2,
+                            opts={'title': "Generated Pointcloud", 'markersize': 3, 'webgl': True})
         if cfg.is_debug:
             ipdb.set_trace()
 

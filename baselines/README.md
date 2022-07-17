@@ -63,7 +63,10 @@ python hybrid_train.py --model={$MODEL} --num_points=1024 --dataset={$DATASET} -
 Please refer to the appendix of our paper for more details about hybrid training. And see ```command.txt``` for the usage of argument {$DATASET}.
 
 ## Attacks
-
+We add visualization function, let's start visdom server first
+```shell
+   python -m visdom.server
+```
 We implement **Perturb**, **Add Point**, **Add Cluster**, **Add Object**, **kNN**, variants of **FGM**,**Drop** and **GeoA3** attack. The attack scripts are in ```attack_scripts/``` folder. Except for Drop method that cannot targetedly attack the victim model, we perform targeted attack according to pre-assigned and fixed target labels.
 
 ### Perturb

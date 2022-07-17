@@ -25,7 +25,8 @@ from attack import CrossEntropyAdvLoss, LogitsAdvLoss
 from attack import ChamferDist, HausdorffDist
 from sklearn.neighbors import NearestNeighbors
 from sklearn.preprocessing import normalize
-
+import visdom
+vis = visdom.Visdom(port=8097)
 clip_min = -1.0
 clip_max = 1.0
 TOP_K = 10
@@ -114,7 +115,7 @@ if __name__ == "__main__":
     # Training settings
     parser = argparse.ArgumentParser(description='Point Cloud Recognition')
     parser.add_argument('--data_root', type=str,
-                        default='../data/attack_data.npz')
+                        default='baselines/data/attack_data.npz')
     parser.add_argument('--model', type=str, default='pointnet', metavar='N',
                         choices=['pointnet', 'pointnet2',
                                  'dgcnn', 'pointconv'],
@@ -236,7 +237,12 @@ if __name__ == "__main__":
 
         pert_list.append(pert_img[None])
         pred_list.append(pred_adv.cpu().data.numpy())
-
+        # visualization
+        p_color = torch.ones(pert_img.shape[0])
+        plot_pc = pert_img[:, :]
+        # plot_pc = plot_pc.transpose(1, 0)
+        vis.scatter(X=plot_pc[:, torch.LongTensor([2, 0, 1])], Y=p_color, win=2,
+                    opts={'title': "Generated Pointcloud", 'markersize': 3, 'webgl': True})
     cloud_list = np.concatenate(cloud_list, axis=0)
     pert_list = np.concatenate(pert_list, axis=0)
     lbl_list = np.concatenate(lbl_list, axis=0)

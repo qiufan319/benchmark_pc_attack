@@ -29,40 +29,7 @@ from util.utils import set_seed
 
 from attack.SIA.attacks import PointCloudAttack
 from util.set_distance_SIA import ChamferDistance, HausdorffDistance
-
-
-
-# def load_data(args):
-#     """Load the dataset from the given path.
-#     """
-#     print('Start Loading Dataset...')
-#     if args.dataset == 'ModelNet40':
-#         TEST_DATASET = ModelNetDataLoader(
-#             root=args.data_path,
-#             npoint=args.input_point_nums,
-#             split='test',
-#             normal_channel=True
-#         )
-#     elif args.dataset == 'ShapeNetPart':
-#         TEST_DATASET = PartNormalDataset(
-#             root=args.data_path,
-#             npoints=args.input_point_nums,
-#             split='test',
-#             normal_channel=True
-#         )
-#     else:
-#         raise NotImplementedError
-#
-#     testDataLoader = torch.utils.data.DataLoader(
-#         TEST_DATASET,
-#         batch_size=args.batch_size,
-#         shuffle=False,
-#         num_workers=args.num_workers
-#     )
-#     print('Finish Loading Dataset...')
-#     return testDataLoader
-
-
+import visdom
 
 def data_preprocess(data):
     """Preprocess the given data and label.
@@ -120,8 +87,6 @@ def main():
         model = PointNet2ClsSsg(num_classes=40)
     elif args.surrogate_model.lower() == 'pointconv':
         model = PointConvDensityClsSsg(num_classes=40).cuda()
-    elif args.surrogate_model.lower() == 'pointcloud_cls':
-        model = pointnet_cls.cuda()
     else:
         print('Model not recognized')
         exit(-1)
@@ -150,6 +115,7 @@ def main():
     target_label=[]
     num = len(test_loader)
     l = [None] * num
+    vis = visdom.Visdom(port=8097)
     for batch_id, data in tqdm(enumerate(test_loader),colour='WHITE',total=len(l),ncols =200,file=sys.stdout):
         # prepare data for testing
         points, target = data_preprocess(data)
@@ -158,7 +124,8 @@ def main():
         # start attack
         t0 = time.perf_counter()
         attack = PointCloudAttack(args,model)
-        adv_points, adv_target, query_costs = PointCloudAttack.run(attack,points,target)
+
+        adv_points, adv_target, query_costs = PointCloudAttack.run(attack,points,target,vis)
         t1 = time.perf_counter()
         avg_time_cost += t1 - t0
         pc.append(adv_points.cpu().numpy())
@@ -188,6 +155,7 @@ def main():
                   'adv_loss: {:.4f}, dist_loss: {:.4f}'.
                   format((batch_id+1), atk_success, (batch_id + 1),
                          avg_mse_dist.item(), (avg_chamfer_dist+avg_hausdorff_dist).item()))
+
     atk_success /= batch_id + 1
     print('Attack success rate: ', atk_success)
     avg_time_cost /= batch_id + 1
@@ -204,8 +172,11 @@ def main():
     all_adv_pc = np.concatenate(pc, axis=0)  # [num_data, K, 3]
     all_real_lbl = np.concatenate(label, axis=0)  # [num_data]
     all_target_lbl = np.concatenate(target_label, axis=0)
-    save_path = 'attack_scripts/attack/results/{}_{}/SIA'. \
+    save_path = 'results/{}_{}/SIA'. \
         format(args.dataset, args.input_point_nums)
+    isExists = os.path.exists(os.path.join(save_path))
+    if not isExists:
+        os.makedirs(os.path.join(save_path))
     save_name = 'SIA-{}-success_{:.4f}.npz'. \
         format(args.target_model,
                atk_success)

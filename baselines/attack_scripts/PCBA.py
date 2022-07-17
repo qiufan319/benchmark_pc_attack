@@ -16,11 +16,13 @@ from attack.PCBA.attack_utils import create_points_RS
 from torch.utils.data import DataLoader
 from util.utils import cal_loss, AverageMeter, get_lr, str2bool, set_seed
 parser = argparse.ArgumentParser()
+import visdom
+vis = visdom.Visdom(port=8097)
 # Data config
 parser.add_argument(
     '--num_points', type=int, default=1024, help='number of points')
 parser.add_argument(
-    '--dataset', type=str, default='/home/jqf/Desktop/benchmark_pc_attack-master/baselines/data/attack_data.npz', help="dataset path")
+    '--dataset', type=str, default='baselines/data/attack_data.npz', help="dataset path")
 parser.add_argument(
     '--split', type=int, default=1000, help='split the original dataset to get a small dataset possessed by the attacker')
 parser.add_argument(
@@ -118,7 +120,7 @@ pointoptloader = torch.utils.data.DataLoader(
 num_classes = args.num_classes
 print('classes: {}'.format(num_classes))
 classifier = PointNetCls(k=num_classes, feature_transform=args.feature_transform)
-classifier.load_state_dict(torch.load('baselines/attack/PCBA/model_surrogate/model.pth'))
+classifier.load_state_dict(torch.load('../attack/PCBA/model_surrogate/model.pth'))
 classifier.to(device)
 classifier = classifier.eval()
 criterion = cal_loss
@@ -265,6 +267,14 @@ def create_attack_samples(idx, center, attack_dir, npoints, target, split, datas
         points_inserted.append(points_adv)
         attack_data.append(points)
         attack_labels.append(target)
+        # visualization
+        p_color = torch.ones(points.shape[0]-32)
+        add_color=torch.ones(32)*2
+        all_color=torch.cat([p_color,add_color],axis=0)
+        plot_pc = points
+        # plot_pc = plot_pc.transpose(1, 0)
+        vis.scatter(X=plot_pc[:, torch.LongTensor([2, 0, 1])], Y=all_color, win=2,
+                    opts={'title': "Generated Pointcloud", 'markersize': 3, 'webgl': True})
     attack_data = np.asarray(attack_data)
     attack_labels = np.asarray(attack_labels)
     points_inserted = np.asarray(points_inserted)
@@ -276,9 +286,9 @@ def create_attack_samples(idx, center, attack_dir, npoints, target, split, datas
              test_pc=attack_data.astype(np.float32),
              test_label=attack_labels.astype(np.uint8),
              target_label=all_target_lbl.astype(np.uint8))
-    np.save(os.path.join(save_path, 'attack_data_{}.npy'.format(split)), attack_data)
-    np.save(os.path.join(save_path, 'attack_labels_{}.npy'.format(split)), attack_labels)
-    np.save(os.path.join(save_path, 'backdoor_pattern_{}.npy'.format(split)), points_inserted, allow_pickle=True)
+    # np.save(os.path.join(save_path, 'attack_data_{}.npy'.format(split)), attack_data)
+    # np.save(os.path.join(save_path, 'attack_labels_{}.npy'.format(split)), attack_labels)
+    # np.save(os.path.join(save_path, 'backdoor_pattern_{}.npy'.format(split)), points_inserted, allow_pickle=True)
     if split == 'train':
         # Save the indices of the clean images used for creating backdoor training images
         np.save(os.path.join(attack_dir, 'ind_train.npy'), ind)
