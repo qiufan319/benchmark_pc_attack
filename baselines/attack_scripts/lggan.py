@@ -12,7 +12,7 @@ import random
 import torch
 from tqdm import tqdm
 from torch.utils.data import DataLoader
-from baselines.attack import ChamferDist, HausdorffDist
+# from baselines.attack import ChamferDist, HausdorffDist
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 sys.path.append(BASE_DIR)
 sys.path.append(os.path.join(BASE_DIR, 'models'))
@@ -24,14 +24,15 @@ import torch.nn as nn
 from model import pointnet_cls
 import lgnet as lgnet
 import model_utils.point_renet as res_model
-
+import visdom
+vis = visdom.Visdom(port=8097)
 root_path=os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.append(root_path)
 
 parser = argparse.ArgumentParser()
 parser.add_argument('--gpu', type=int, default=0, help='GPU to use [default: GPU 0]')
 parser.add_argument('--model_attacked', default='pointnet_cls', help='Attacked-model name: pointnet_cls or pointnet_cls_basic [default: pointnet_cls]')
-parser.add_argument('--batch_size', type=int, default=8, help='Batch Size during training [default: 1]')
+parser.add_argument('--batch_size', type=int, default=4, help='Batch Size during training [default: 1]')
 parser.add_argument('--num_point', type=int, default=1024, help='Point Number [256/512/1024/2048] [default: 2048]')
 parser.add_argument('--model_path', default='baselines/pretrain/pointnet_cls.pth', help='model checkpoint file path [default: pointnet/model.ckpt]')
 parser.add_argument('--adv_path', default='LGGAN', help='output adversarial example path [default: LGGAN]')
@@ -212,6 +213,12 @@ def evaluate(num_votes=1):
 
                     avg_distance=np.mean(total_loss)
                     distance_adv.append(avg_distance)
+                # visualization
+                p_color = torch.ones(generator_pc.shape[1])
+                plot_pc = generator_pc[0, :, :]
+                # plot_pc = plot_pc.transpose(1, 0)
+                vis.scatter(X=plot_pc[:, torch.LongTensor([2, 0, 1])], Y=p_color, win=2,
+                            opts={'title': "Generated Pointcloud", 'markersize': 3, 'webgl': True})
 
         print("total loss %f" % np.mean(distance_adv))
         print('attack success rate: %f' % (1-(total_correct_adv / float(total_seen))))

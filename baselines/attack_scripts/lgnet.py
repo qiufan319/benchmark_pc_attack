@@ -31,6 +31,7 @@ class get_gen_model(nn.Module):
         self.conv1d_4 = nn.Conv1d(168, 64, kernel_size=1)
         self.conv1d_5 = nn.Conv1d(64, 3, kernel_size=1)
         self.relu=nn.ReLU()
+        self.bn=nn.BatchNorm1d(128)
     def forward(self, point_cloud,labels_onehot):
         batch_size = point_cloud.size(0)
         num_point = point_cloud.size(1)
@@ -85,21 +86,16 @@ class get_gen_model(nn.Module):
 
             labels_onehot1 = labels_onehot.unsqueeze(2).repeat(1, 1, num_point)
             concat_feat = torch.cat([concat_feat, labels_onehot1], 1)
-            new_points = F.relu(self.conv1d_3(concat_feat))
-            # new_points = self.conv2d_3(concat_feat)
-            # new_points = self.relu(new_points)
+            new_points = self.conv1d_3(concat_feat)
+            new_points=self.bn(new_points)
+            new_points=F.relu(new_points)
             new_points_list.append(new_points)
         net = torch.cat(new_points_list, -1)
         labels_onehot1 = labels_onehot.unsqueeze(2).repeat(1, 1, num_point)
         net = torch.cat([net, labels_onehot1], 1)
         # get the xyz
-        # coord = self.conv2d_4(net)
-        # coord = self.relu(coord)
         coord=F.relu(self.conv1d_4(net))
-        # coord = self.conv2d_5(coord) # B*(2N)*1*3
-        # coord = self.relu(coord)
-        coord = F.relu(self.conv1d_5(coord))
-        # coord = coord.squeeze(2)  # B*(2N)*3
+        coord = self.conv1d_5(coord)
         return coord, None
 
 

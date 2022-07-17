@@ -12,6 +12,8 @@ import random
 import torch
 from tqdm import tqdm
 from torch.utils.data import DataLoader
+import visdom
+vis = visdom.Visdom(port=8097)
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 sys.path.append(BASE_DIR)
 sys.path.append(os.path.join(BASE_DIR, 'models'))
@@ -21,7 +23,9 @@ from dataset import ModelNet40Attack
 import torch.nn.functional as F
 import torch.nn as nn
 from model import pointnet_cls
-
+from model import DGCNN, PointNetCls, PointNet2ClsSsg, PointConvDensityClsSsg
+from config import BEST_WEIGHTS
+from util.utils import str2bool, set_seed
 parser = argparse.ArgumentParser()
 parser.add_argument('--gpu', type=int, default=0, help='GPU to use [default: GPU 0]')
 parser.add_argument('--model_attacked', default='pointnet_cls', help='Attacked-model name: pointnet_cls or pointnet_cls_basic [default: pointnet_cls]')
@@ -36,8 +40,17 @@ parser.add_argument('--data_root', type=str, default='../data/attack_data.npz', 
 parser.add_argument('--num_class', type=int, default='40', help='the number of class')
 parser.add_argument('--save_data', type=str, default='mn40', help='the type of dataset')
 parser.add_argument('--num_points', type=int, default='1024', help='the number of points')
+parser.add_argument('--dataset', type=str, default='mn40', metavar='N',
+                        choices=['mn40', 'remesh_mn40',
+                                 'opt_mn40', 'conv_opt_mn40'])
+parser.add_argument('--model', type=str, default='pointnet', metavar='N',
+                        choices=['pointnet', 'pointnet2',
+                                 'dgcnn', 'pointconv'],
+                        help='Model to use, [pointnet, pointnet++, dgcnn, pointconv]')
+parser.add_argument('--feature_transform', type=str2bool, default=False,
+                        help='whether to use STN on features in PointNet')
 args = parser.parse_args()
-
+BEST_WEIGHTS = BEST_WEIGHTS[args.dataset][args.num_point]
 LEARNING_RATE = 1e-3
 ITERATION = 10
 NUM_CLASSES=args.num_class
@@ -98,6 +111,7 @@ def evaluate(num_votes=1):
     opt = optim.Adam(G_model.parameters(),
                      lr=LEARNING_RATE, weight_decay=0.)
     scheduler = torch.optim.lr_scheduler.ExponentialLR(opt, gamma=0.96)
+
     for my_iter in range(ITERATION):
         error_cnt = 0
         total_correct_adv = 0
@@ -111,6 +125,12 @@ def evaluate(num_votes=1):
         all_real_lbl = []
         all_target_lbl = []
         l_2=[]
+
+        pointnet_mode = pointnet_cls.get_model(normal_channel=False).cuda()
+
+        # load attacked model
+        pointnet_mode = load_models(pointnet_mode, args.model_attacked)
+
         for pc, label, target in tqdm(test_loader):
             with torch.no_grad():
                 pc, label = pc.float().cuda(non_blocking=True), \
@@ -133,11 +153,6 @@ def evaluate(num_votes=1):
                     original_labels = test_label[test_start_idx:test_end_idx]
                     target_labels = target_label
                     generator_pc,_=G_model(pc, labels_onehot)
-
-                    pointnet_mode=pointnet_cls.get_model(normal_channel=False).cuda()
-
-                    #load attacked model
-                    pointnet_mode=load_models(pointnet_mode,args.model_attacked)
 
                     # generate pointcloud
                     pred, end_points = pointnet_mode(generator_pc)
@@ -169,6 +184,12 @@ def evaluate(num_votes=1):
                         l = test_label[i]
                         total_seen_class_adv[l] += 1
                         total_correct_class_adv[l] += (pred_val_adv[i - test_start_idx] == l).cpu().numpy()
+                # visualization
+                p_color = torch.ones(generator_pc.shape[1])
+                plot_pc = generator_pc[0, :, :]
+                # plot_pc = plot_pc.transpose(1, 0)
+                vis.scatter(X=plot_pc[:, torch.LongTensor([2, 0, 1])], Y=p_color, win=2,
+                            opts={'title': "Generated Pointcloud", 'markersize': 3, 'webgl': True})
         print("generate loss%f" % generator_loss )
         print('eval adv accuracy: %f' % (total_correct_adv / float(total_seen)))
         print('eval adv attack success rate: %f' % (total_attack_adv / float(total_seen)))
@@ -219,7 +240,7 @@ def evaluate(num_votes=1):
                     total_loss.backward()
                     opt.step()
         state = {'net': G_model.state_dict(), 'optimizer': opt.state_dict()}
-        torch.save(state, '/home/jqf/桌面/benchmark_pc_attack-master/baselines/attack/LG/model.pth')
+        torch.save(state, '/home/jqf/桌面/benchmark_pc_attack1-master（复件）/baselines/attack/LG/model.pth')
 
 
         # test all
