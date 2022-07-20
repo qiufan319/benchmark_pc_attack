@@ -96,7 +96,7 @@ if __name__ == "__main__":
     parser.add_argument('--mode', type=str, default='normal',
                         choices=['normal', 'target'],
                         help='Testing mode')
-    parser.add_argument('--model', type=str, default='pointnet',
+    parser.add_argument('--model', type=str, default='pointnet2',
                         choices=['pointnet', 'pointnet2',
                                  'dgcnn', 'pointconv', 'curvenet', 'pct', 'simple_view', 'pointcnn'],
                         help='Model to use, [pointnet, pointnet++, dgcnn, pointconv,curvenet,pct,simple_view]')

@@ -22,7 +22,7 @@ vis = visdom.Visdom(port=8097)
 parser.add_argument(
     '--num_points', type=int, default=1024, help='number of points')
 parser.add_argument(
-    '--dataset', type=str, default='baselines/data/attack_data.npz', help="dataset path")
+    '--dataset', type=str, default='../data/attack_data.npz', help="dataset path")
 parser.add_argument(
     '--split', type=int, default=1000, help='split the original dataset to get a small dataset possessed by the attacker')
 parser.add_argument(

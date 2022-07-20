@@ -46,7 +46,7 @@ parser.add_argument('--num_points', type=int, default='1024', help='the number o
 args = parser.parse_args()
 
 # LEARNING_RATE = 1e-3
-ITERATION = 100
+ITERATION = 150
 NUM_CLASSES=args.num_class
 TAU = args.tau
 g_lr = 1e-3
@@ -254,16 +254,11 @@ def evaluate(num_votes=1):
 
                     # train_rotated_data = train_data[train_start_idx:train_end_idx, :, :]
                     #
-                    # original_labels = train_label[train_start_idx:train_end_idx]
-                    target_labels = target_label
-                    generator_pc, _ = G_model(train_data, labels_onehot)
-                    pred, end_points = pointnet_mode(generator_pc)
-                    train_rotated_data = train_data[train_start_idx:train_end_idx, :, :]
-
                     original_labels = train_label[train_start_idx:train_end_idx]
                     target_labels = target_label
                     generator_pc, _ = G_model(train_data, labels_onehot)
                     pred, end_points = pointnet_mode(generator_pc)
+                    train_rotated_data = train_data[train_start_idx:train_end_idx, :, :]
 
                     # discriminator
                     # real data
@@ -298,11 +293,11 @@ def evaluate(num_votes=1):
                     opt_D.step()
 
         state = {'net': G_model.state_dict(), 'optimizer': opt_G.state_dict()}
-        torch.save(state, '/home/jqf/桌面/benchmark_pc_attack1-master/baselines/attack/LG/model.pth')
+        torch.save(state, '/home/jqf/桌面/benchmark_pc_attack1-master（复件）/baselines/attack/LG/model.pth')
 
     # test all
     print('generate adversarial examples')
-    PATH='/home/jqf/桌面/benchmark_pc_attack-master/baselines/attack/LG/model.pth'
+    PATH='/home/jqf/桌面/benchmark_pc_attack1-master（复件）/baselines/attack/LG/model.pth'
     model_dict = torch.load(PATH)
     G_model.load_state_dict(model_dict['net'])
     if my_iter + 1 == ITERATION:
