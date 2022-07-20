@@ -36,7 +36,8 @@ Please go to each folder to see how to use the code in detail.
 06/22/2022 Update LG-GAN.\
 07/02/2022 Update ISO and L3A.\
 07/10/2022 Update EOP and CTA.\
-07/13/2022 Update JGBA.
+07/13/2022 Update JGBA.\
+07/20/2022 Update LPF.
 ## Result
 Classification accuracy of ModelNet40 under black-box attacks and defense.\
 ***baslines***: PointNet
